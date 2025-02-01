@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="/main.js" defer></script>
+    <title>Flying OTP - Sign Up</title>
+</head>
+<body>
+    <div class="container">
+        <img src="./logo.png" alt="Flying OTP Logo" class="logo">
+        
+        <div class="form-container">
+            <h1>Sign Up</h1>
+            <form id="signup-form">
+                <input type="text" id="fullname" placeholder="Enter your full name" required />
+                <input type="email" id="email" placeholder="Enter your email" required />
+                <input type="password" id="password" placeholder="Enter your password" required />
+                <button type="submit" class="btn">Sign Up</button>
+                <p class="login-link">Already have an account? <a href="/login.html">Login</a></p>
+            </form>
+        </div>
+
+        <div class="form-container" id="otp-form-container">
+            <h2>OTP Verification</h2>
+            <p>Please enter the OTP sent to your email.</p>
+            <form id="otp-form" method="post">
+                <label for="otp">Enter OTP:</label>
+                <input type="text" id="otp" name="token" placeholder="Enter OTP" required />
+                <input type="hidden" name="email" id="otp-email">
+                <div class="btn-group">
+                    <button type="button" id="cancel-btn" class="btn">Cancel</button>
+                    <button type="submit" class="btn">Confirm OTP</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: red;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #181616;
+  color: #9d9d9d;
+}
+
+.container {
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #222;
+  box-shadow: 0 4px 8px #0000004d;
+}
+
+.form-container {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px #00000033;
+  margin-bottom: 20px;
+}
+
+h1,
+h2 {
+  color: #f2f2f2;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+}
+
+#otp-form-container {
+  display: none;
+}
+
+.login-link {
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.login-form {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.signup-link {
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.logo {
+  max-width: 120px;
+  margin: 0 auto 20px;
+}
+
+.auth-status {
+  font-weight: bold;
+  margin: 20px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success {
+  color: #4caf50;
+}
+
+.error {
+  color: #ff6347;
+}
+
+.auth-links,
+.message {
+  margin-top: 15px;
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin: 5px 0;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+  }
+
+.info {
+  margin-top: 30px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #333;
+  color: #ddd;
+}
+
+.user-greeting {
+  font-size: larger;
+  font-variant: small-caps;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.5;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" con
+    tent="width=device-width, initial-scale=1.0">
+    <title>Flying OTP - Authentication Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="./logo.png" alt="Flying OTP Logo" class="logo">
+            <h1>Flying OTP Authentication Demo</h1>
+        </header>
+
+        <main>
+            <div class="message">
+                <% if (authenticated) { %>
+                    <p class="user-greeting">Hello, <%- authenticated['fullname'] %></p>
+                    <p class="auth-status success">You are authenticated.</p>
+                    <a href="/logout" class="btn">Logout</a>
+                <% } else { %>
+                    <p class="auth-status error">You are not authenticated.</p>
+                    <div class="auth-links">
+                        <a href="/login.html" class="btn">Login</a>
+                        <a href="/signup.html" class="btn">Sign Up</a>
+                    </div>
+                <% } %>
+            </div>
+            
+            <section class="info">
+                <h2>About Flying OTP</h2>
+                <p>This is a demo for an OTP-based authentication system. You can sign up, log in, and verify your account with a one-time password sent to your email.</p>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
