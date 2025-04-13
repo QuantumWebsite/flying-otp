@@ -1,8 +1,5 @@
-export function randomToken() {
-    let token = '';
-    for (let i = 0; i < 4; i++) {
-        token += Math.floor(Math.random() * 10);
-    }
+import crypto from 'crypto';
 
-    return token;
+export function randomToken() {
+    return crypto.randomInt(1000, 10000).toString();
 }

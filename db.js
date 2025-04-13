@@ -37,6 +37,7 @@ class RedisClient {
   }
 
   set(key, value, exp) {
+    console.log(key, value,exp)
     return this.client.SETEX(key, exp, value);
   }
 

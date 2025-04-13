@@ -12,7 +12,7 @@ class MailService {
         });
     }
 
-    sendOTP(email, otp, link) {
+    sendOTP(email, otp) {
         const html = `
         <body style="background-color: #f4f4f4; color: #333; font-family: Arial, sans-serif; padding: 20px; text-align: center;">
             <div style="background-color: #2c3e50; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
@@ -22,11 +22,6 @@ class MailService {
             <div style="margin: 20px 0; font-size: 18px; font-weight: bold;">
                 <p>Please verify your account using the following OTP:</p>
                 <h2 style="color: #e74c3c;">${otp}</h2>
-            </div>
-
-            <div style="margin: 20px 0; font-size: 16px; font-style: italic;">
-                <p>Alternatively, you can activate your account by clicking the link below:</p>
-                <a href="${link}" style="color: #3498db; font-weight: bold; text-decoration: none;">Activate Account</a>
             </div>
 
             <div style="margin-top: 20px; font-size: 14px; color: #7f8c8d;">

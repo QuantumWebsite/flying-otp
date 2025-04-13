@@ -9,7 +9,7 @@ import { mongoDB, redisDB } from './db.js';
 import { randomToken } from './utils.js';
 import mailService from './mailer.js';
 import { createToken, verifyToken } from './tokenManager.js';
-
+import { verify, hash } from 'argon2';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -38,22 +38,24 @@ app.post('/register', async (req, res) => {
     const { fullname, email, password } = req.body;
     const otp = randomToken();
 
-    const url = `${req.protocol}://${req.get('host')}/account-activation?token=${otp}&email=${email}`;
-
+    const hashed_password = await hash(password)
 
     try {
-        const oldUser = await User.findOne({ email });
+        const registeredUser = await User.findOne({ email });
         
-        
-        if (oldUser && oldUser.active) {
+        if (registeredUser && registeredUser.active) {
             return res.status(401).send('User already exists')
-        } else if (!oldUser) {
-            const user = new User({ fullname, email, password });
+        } else if (!registeredUser.active) {
+            registeredUser.fullname = fullname;
+            registeredUser.password = hashed_password;
+            registeredUser.save();
+        } else {
+            const user = new User({ fullname, email, password: hashed_password });
             await user.save();
         }
         
         await redisDB.set(`token_${email}`, otp, 60);
-        mailService.sendOTP(email, otp, url);
+        mailService.sendOTP(email, otp);
     } catch (error) {
         console.error(error);
         return res.status(401).send('Authentication failed')
@@ -65,11 +67,6 @@ app.post('/register', async (req, res) => {
 // Account activation
 app.post('/account-activation', async (req, res) => {
     let { token, email } = req.body;
-
-    if (!token || !email) {
-        token = req.params.token;
-        email = req.params.email;
-    }
 
     const extracted_token = await redisDB.get(`token_${email}`);
 
@@ -104,7 +101,9 @@ app.post('/login', async (req, res) => {
         return res.status(401).send('User not found or account not activated');
     }
 
-    if (user.password === password) {
+    const passwordMatch = await verify(user.password, password);
+
+    if (passwordMatch) {
         // Store user details in session (excluding password)
         const { password: userPassword, ...payload } = user.toObject();
         const token = createToken(payload, '7d');
@@ -142,8 +141,8 @@ app.get('/logout', (req, res) => {
 // Start server and connect to databases
 server.listen(PORT, async () => {
     try {
-        await redisDB.run();
         await mongoDB.run();
+        await redisDB.run();
         console.log(`Listening on http://localhost:${PORT}`);
     } catch (err) {
         console.error('Error starting server:', err);
