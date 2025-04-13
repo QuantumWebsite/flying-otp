@@ -84,10 +84,13 @@ app.post('/account-activation', async (req, res) => {
         user.active = true;
         await user.save();
 
+        
+        await redisDB.del(`token_${email}`)
         res.redirect('/login.html');
     } else {
         res.status(403).send('Invalid token');
     }
+
 });
 
 // User login
